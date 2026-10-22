@@ -71,7 +71,15 @@ Retrieved documentation context (use only as evidence):\n${context}`;
   }
   if (!response.ok) {
     if (response.status === 429) throw new Error("Gemini rate limit reached. Wait a moment and try again.");
-    throw new Error(`Gemini request failed (HTTP ${response.status}). Check the API key and model settings.`);
+    let providerMessage = "";
+    try {
+      const errorPayload = await response.json();
+      providerMessage = String(errorPayload?.error?.message || "").replaceAll(apiKey.trim(), "[redacted]").slice(0, 300);
+    } catch {
+      // Keep the HTTP status if Gemini returns a non-JSON error body.
+    }
+    const detail = providerMessage ? `: ${providerMessage}` : ". Check the API key and model settings.";
+    throw new Error(`Gemini request failed (HTTP ${response.status})${detail}`);
   }
   let result;
   try {
