@@ -26,7 +26,7 @@ Without `GEMINI_API_KEY`, the interface and local retriever still run, but analy
 
 ## Deploy to Netlify
 
-The Netlify configuration publishes `static/` and serves `/api/analyze` through a serverless function. Set `GEMINI_API_KEY` in the Netlify site's environment variables with Functions access enabled; keep the key out of this repository and out of `.env.example`. `GEMINI_MODEL` is optional and defaults to `gemini-2.5-flash`. After linking the site and setting the key, deploy with `netlify deploy --build --prod`.
+The Netlify configuration publishes `static/` and serves `/api/analyze` through a serverless function. Gemini is the primary provider (`GEMINI_API_KEY`, default model `gemini-2.5-flash`). Add `GROQ_API_KEY` in Netlify environment variables to enable automatic failover when Gemini is unavailable; Groq defaults to `openai/gpt-oss-20b`. Set both keys in Netlify with Functions access enabled. During failover, the submitted snippet and retrieved excerpts are sent to Groq too. Keep both keys out of this repository and out of `.env.example`. The local Python server still uses Gemini only.
 
 ## Pages and navigation
 
@@ -63,7 +63,7 @@ It covers empty input, a valid mocked analysis, a broken C `scanf` example, retr
 - Source files are read into the editor in the browser. Nothing is sent for analysis until the user chooses **Analyze code**; that request sends the code and retrieved documentation context to Gemini.
 - One-click request to a Python HTTP backend, lexical retrieval from a small official-document corpus, Gemini context injection, structured response validation, and returned-source display.
 - Helpful empty, loading, success, and error states. No submitted code execution.
-- Gemini credentials are required for generated analysis. No credentials were bundled with this project.
+- At least one provider credential is required for generated analysis. No credentials are bundled with this project.
 - The corpus is intentionally small; lexical matching can miss relevant passages. This MVP does not use embeddings, FAISS, or ChromaDB.
 - Model findings and suggested patches are hypotheses, not compiler-verified facts. Suggested tests are not executed.
 - Browser font files are requested from Google Fonts; system font fallbacks keep the page usable offline.

@@ -40,7 +40,7 @@
             <div class="results-footer"><span><span class="footer-dot"></span><span id="rag-label">Waiting for code</span></span><span id="source-total">0 sources</span></div>
           </section>
         </div>
-        <section class="corpus-strip" id="sources"><div class="corpus-icon">▤</div><div><b>Small, verifiable documentation corpus</b><p>Official POSIX, Python, and MDN excerpts are indexed locally. When you choose Analyze, your snippet and retrieved excerpts are sent to Gemini; sources appear with the result.</p></div><div class="corpus-docs"><span>POSIX · C</span><span>Python docs</span><span>MDN · JS</span></div></section>
+        <section class="corpus-strip" id="sources"><div class="corpus-icon">▤</div><div><b>Small, verifiable documentation corpus</b><p>Official POSIX, Python, and MDN excerpts are indexed locally. When you choose Analyze, your snippet and retrieved excerpts go to Gemini first. If it is unavailable and Groq is configured, the same content is sent to Groq as an automatic fallback; sources appear with the result.</p></div><div class="corpus-docs"><span>POSIX · C</span><span>Python docs</span><span>MDN · JS</span></div></section>
         <footer><span>CodeSaathi AI <span class="footer-sep">/</span> Hackathon MVP</span><span>Evidence first. No code execution.</span></footer>
       </section>
     </main>
