@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#030303" />
+  <title>CodeSaathi AI · Code workbench</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="rail">
+      <a class="brand" href="/" aria-label="CodeSaathi home"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M12 9 6 16l6 7M20 9l6 7-6 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="2.2" fill="#06B6D4"/></svg></span><span>CodeSaathi <b>AI</b></span></a>
+      <div class="rail-label">WORKSPACE</div>
+      <a class="nav-item" href="/"><span class="nav-icon">⌂</span>Overview</a>
+      <a class="nav-item active" href="/workbench"><span class="nav-icon">⌘</span>Code workbench</a>
+      <a class="nav-item" href="#sources"><span class="nav-icon">▤</span>Documentation</a>
+      <div class="rail-bottom"><div class="online-dot"></div><span>Local RAG ready</span><small>v0.1 · MVP</small></div>
+    </aside>
+    <main id="top">
+      <header class="topbar"><div class="crumb"><a href="/" class="muted crumb-home">CodeSaathi</a><span class="slash">/</span><strong>Code workbench</strong></div><div class="top-actions"><span class="privacy"><span class="lock">◈</span> Files load locally</span><button class="avatar" aria-label="Profile">V</button></div></header>
+      <section class="content" id="workbench">
+        <div class="heading-row"><div><div class="eyebrow"><span class="spark">⌘</span> CODE WORKBENCH</div><h2>Bring a snippet. Get a clearer next step.</h2><p class="intro">Paste code for a grounded explanation, likely issues, a proposed fix, and relevant documentation.</p></div><div class="rag-status"><span class="status-light"></span><div><b>Retrieval online</b><small>Local documentation · lexical search</small></div></div></div>
+        <div class="workspace-grid">
+          <section class="editor-panel panel">
+            <div class="panel-bar"><div class="panel-title"><span class="file-icon">⌘</span><strong>Code input</strong><span class="file-name" id="filename">untitled.c</span></div><div class="editor-controls"><label for="language" class="sr-only">Programming language</label><select id="language"><option value="c">C</option><option value="python">Python</option><option value="javascript">JavaScript</option></select><input id="file-input" class="sr-only" type="file" accept=".c,.h,.py,.js,.mjs,.jsx,.txt,text/plain" aria-hidden="true" tabindex="-1" /><button class="button ghost" id="upload-file" type="button">Upload file</button><button class="button ghost" id="sample">Load sample</button></div></div>
+            <div class="editor-wrap"><div class="line-numbers" id="line-numbers">1</div><label for="code" class="sr-only">Paste your code here</label><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="// Paste a code snippet here…&#10;// Choose a language and run an analysis."></textarea></div>
+            <div class="editor-footer"><span><span class="dot"></span> Static review only · code is never executed</span><span id="char-count">0 / 20,000</span></div>
+            <div class="analyze-row"><div class="question-wrap"><label for="question">OPTIONAL QUESTION</label><input id="question" type="text" placeholder="e.g. Why does this crash?" maxlength="300" /></div><button class="button primary" id="analyze"><span class="analyze-icon">✳</span><span>Analyze code</span><kbd>⌘ ↵</kbd></button></div>
+            <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+          </section>
+          <section class="results-panel panel" aria-label="Analysis results">
+            <div class="panel-bar results-header"><div class="panel-title"><span class="result-icon">◉</span><strong>Analysis</strong><span id="analysis-state" class="state-pill">READY</span></div><button class="icon-button" id="clear" title="Clear results" aria-label="Clear results">↺</button></div>
+            <div class="tabs" role="tablist" aria-label="Analysis sections"><button class="tab active" role="tab" aria-selected="true" data-tab="overview">Overview</button><button class="tab" role="tab" aria-selected="false" data-tab="bugs">Bugs <span class="tab-count" id="bug-count">—</span></button><button class="tab" role="tab" aria-selected="false" data-tab="fix">Suggested fix</button><button class="tab" role="tab" aria-selected="false" data-tab="tests">Tests</button><button class="tab" role="tab" aria-selected="false" data-tab="sources">Sources</button></div>
+            <div class="result-content" id="result-content"><div class="empty-state"><div class="empty-orbit"><span>✳</span></div><h2>Ready when you are</h2><p>Your explanation and grounded diagnostics will appear here after analysis.</p><div class="empty-hint"><span>↗</span> Try the sample to explore the workbench</div></div></div>
+            <div class="results-footer"><span><span class="footer-dot"></span><span id="rag-label">Waiting for code</span></span><span id="source-total">0 sources</span></div>
+          </section>
+        </div>
+        <section class="corpus-strip" id="sources"><div class="corpus-icon">▤</div><div><b>Small, verifiable documentation corpus</b><p>Official POSIX, Python, and MDN excerpts are indexed locally. When you choose Analyze, your snippet and retrieved excerpts are sent to Gemini; sources appear with the result.</p></div><div class="corpus-docs"><span>POSIX · C</span><span>Python docs</span><span>MDN · JS</span></div></section>
+        <footer><span>CodeSaathi AI <span class="footer-sep">/</span> Hackathon MVP</span><span>Evidence first. No code execution.</span></footer>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

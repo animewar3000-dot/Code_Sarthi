@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#030303" />
+  <meta name="description" content="Understand unfamiliar code with evidence-backed explanations, likely bugs, and useful references." />
+  <title>CodeSaathi AI · Understand the code</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="landing-page">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="CodeSaathi home"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M12 9 6 16l6 7M20 9l6 7-6 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="2.2" fill="#06B6D4"/></svg></span><span>CodeSaathi <b>AI</b></span></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="/workbench">Documentation &amp; tools</a></nav>
+    <a class="site-open" href="/workbench">Open workbench <span aria-hidden="true">↗</span></a>
+  </header>
+  <main class="landing-main" id="top">
+    <section class="hero landing-hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="hero-kicker"><span class="hero-kicker-line"></span> CODE EXPLAINER &amp; DEBUGGING WORKBENCH</div>
+        <h1 id="hero-title">Find the bug.<br /><span>Understand why.</span></h1>
+        <p class="hero-lede">Turn unfamiliar code into a clear explanation, actionable fixes, and documentation you can verify.</p>
+        <div class="hero-actions"><a class="hero-primary" href="/workbench">Open the workbench <span class="arrow-nudge" aria-hidden="true">→</span></a><a class="hero-text-link" href="#how-it-works">Explore the workflow <span aria-hidden="true">↓</span></a></div>
+        <div class="hero-proof"><span class="proof-mark">✓</span> Static review only <span class="proof-divider"></span> No code execution <span class="proof-divider"></span> Sources shown with every result</div>
+      </div>
+
+      <section class="hero-visual" aria-label="Interactive product walkthrough" aria-roledescription="carousel" tabindex="0">
+        <div class="visual-topline"><span>CODE INSIGHT · PRODUCT WALKTHROUGH</span><span class="visual-live"><i></i> LOCAL RETRIEVAL</span></div>
+        <div class="carousel-window" aria-live="polite">
+          <div class="carousel-track" id="hero-carousel-track">
+            <article class="carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3: Spot the issue">
+              <div class="scene-heading"><span>01 / INSPECT</span><b>Spot the issue</b><small>A likely bug is highlighted in context.</small></div>
+              <div class="scene-code-card">
+                <div class="scene-card-top"><span class="mini-file">{ }</span><span>main.c</span><span class="stage-dot"></span></div>
+                <div class="snippet"><span class="line-no">01</span><span class="syntax-purple">int</span> value;</div>
+                <div class="snippet issue-line"><span class="line-no">02</span><span class="syntax-cyan">scanf</span>(<span class="syntax-green">"%d"</span>, value);</div>
+                <div class="snippet"><span class="line-no">03</span><span class="syntax-purple">return</span> 0;</div>
+                <div class="scene-card-foot"><span>C</span><span>Line 2 flagged for review</span></div>
+              </div>
+              <svg class="scene-connector connector-one" viewBox="0 0 150 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 C45 0 95 75 150 75"/><circle r="3"><animateMotion dur="2.6s" repeatCount="indefinite" path="M0 0 C45 0 95 75 150 75"/></circle></svg>
+              <div class="scene-diagnostic-card"><div class="scene-card-top"><span class="result-glyph">◉</span><span>Likely issue</span><span class="severity-chip">MEDIUM</span></div><b>Pass a pointer</b><p>For <code>%d</code>, <code>scanf</code> needs the address of an integer.</p><span class="scene-source">Line 2 · review suggested</span></div>
+              <div class="scene-caption"><span class="caption-rule"></span>Issue location and reasoning at a glance</div>
+            </article>
+
+            <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3: Check the evidence">
+              <div class="scene-heading"><span>02 / RETRIEVE</span><b>Check the evidence</b><small>Open the exact reference used as context.</small></div>
+              <div class="scene-doc-card">
+                <div class="scene-card-top"><span class="docs-glyph">▤</span><span>Retrieved reference</span><span class="match-tag">MATCHED</span></div>
+                <div class="doc-title">fscanf, scanf, sscanf</div>
+                <div class="doc-section">Open Group · POSIX</div>
+                <blockquote>“a set of pointer arguments indicating where the converted input should be stored.”</blockquote>
+                <div class="scene-card-foot"><span>pubs.opengroup.org</span><span>Source excerpt</span></div>
+              </div>
+              <svg class="scene-connector connector-two" viewBox="0 0 170 75" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 C70 0 90 75 170 75"/><circle r="3"><animateMotion dur="3s" repeatCount="indefinite" path="M0 0 C70 0 90 75 170 75"/></circle></svg>
+              <div class="scene-verification-card"><span class="verification-check">✓</span><div><b>Source stays inspectable</b><p>Relevant excerpt and canonical URL are displayed with the result.</p></div></div>
+              <div class="scene-caption"><span class="caption-rule"></span>Local lexical retrieval · evidence sent to Gemini</div>
+            </article>
+
+            <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3: Review a suggested fix">
+              <div class="scene-heading"><span>03 / REVIEW</span><b>Consider a correction</b><small>Suggestions are yours to inspect and apply.</small></div>
+              <div class="scene-diff-card">
+                <div class="scene-card-top"><span class="mini-file">{ }</span><span>Suggested correction</span><span class="suggestion-tag">PROPOSED</span></div>
+                <div class="diff-line diff-old"><span>−</span><code>scanf("%d", value);</code></div>
+                <div class="diff-line diff-new"><span>+</span><code>scanf("%d", &amp;value);</code></div>
+                <div class="scene-card-foot"><span>Proposed by analysis</span><span>Not executed</span></div>
+              </div>
+              <div class="scene-test-card"><span class="result-glyph">⌁</span><div><b>Test ideas included</b><p>Try valid input, invalid input, and end-of-file.</p></div></div>
+              <svg class="scene-connector connector-three" viewBox="0 0 170 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 C60 0 110 75 170 75"/><circle r="3"><animateMotion dur="2.8s" repeatCount="indefinite" path="M0 0 C60 0 110 75 170 75"/></circle></svg>
+              <div class="scene-caption"><span class="caption-rule"></span>Suggestions are not presented as verified execution</div>
+            </article>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-arrow" type="button" data-carousel="previous" aria-label="Previous walkthrough screen">←</button>
+          <div class="carousel-dots" role="group" aria-label="Choose walkthrough screen"><button type="button" class="carousel-dot is-active" aria-label="Show screen 1 of 3" aria-current="true" data-slide-to="0"></button><button type="button" class="carousel-dot" aria-label="Show screen 2 of 3" data-slide-to="1"></button><button type="button" class="carousel-dot" aria-label="Show screen 3 of 3" data-slide-to="2"></button></div>
+          <span class="carousel-count" id="carousel-count">01 / 03</span>
+          <button class="carousel-arrow" type="button" data-carousel="next" aria-label="Next walkthrough screen">→</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="how-section" id="how-it-works">
+      <div class="how-heading"><div class="hero-kicker"><span class="hero-kicker-line"></span> A CLEARER DEBUGGING LOOP</div><h2>From code to context, in one place.</h2><p>Understand the finding, inspect its source, and decide what to do next.</p></div>
+      <div class="how-grid">
+        <article class="how-card"><span class="how-number">01</span><h3>Bring a snippet</h3><p>Paste C, Python, or JavaScript. Your code is reviewed as text and never executed.</p><span class="how-icon code-icon">{ }</span></article>
+        <article class="how-card"><span class="how-number">02</span><h3>Retrieve references</h3><p>Local lexical search finds relevant excerpts from a compact official documentation corpus.</p><span class="how-icon docs-icon">▤</span></article>
+        <article class="how-card"><span class="how-number">03</span><h3>Review the analysis</h3><p>See likely issues, a proposed correction, test ideas, and the sources used as context.</p><span class="how-icon result-icon-how">◉</span></article>
+      </div>
+      <div class="how-cta"><div><b>Ready to trace a bug?</b><span>Start with a short example in the workbench.</span></div><a class="hero-primary" href="/workbench">Open the workbench <span class="arrow-nudge" aria-hidden="true">→</span></a></div>
+    </section>
+    <footer class="landing-footer">
+      <div class="landing-footer-grid">
+        <div class="footer-brand-block"><a class="brand" href="/" aria-label="CodeSaathi home"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M12 9 6 16l6 7M20 9l6 7-6 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="2.2" fill="#06B6D4"/></svg></span><span>CodeSaathi <b>AI</b></span></a><p>Evidence first. No code execution.</p></div>
+        <div class="footer-column"><b>PRODUCT</b><a href="#how-it-works">How it works</a><a href="/workbench">Code workbench</a></div>
+        <div class="footer-column"><b>REVIEW</b><span>Static analysis</span><span>Suggested fixes</span></div>
+        <div class="footer-column"><b>DOCUMENTATION</b><a href="/workbench#sources">Official source corpus</a><span>POSIX · Python · MDN</span></div>
+      </div>
+      <div class="landing-footer-bottom"><span>© CodeSaathi AI · Hackathon MVP</span><span class="footer-status"><i></i> Local retrieval ready</span></div>
+    </footer>
+  </main>
+  <script src="/landing.js" defer></script>
+</body>
+</html>
