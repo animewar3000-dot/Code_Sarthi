@@ -24,6 +24,10 @@ To use a different model or port, set `GEMINI_MODEL` or `PORT` before starting t
 
 Without `GEMINI_API_KEY`, the interface and local retriever still run, but analysis displays a configuration error. No fake or local substitute analysis is presented as AI output.
 
+## Deploy to Netlify
+
+The Netlify configuration publishes `static/` and serves `/api/analyze` through a serverless function. Set `GEMINI_API_KEY` in the Netlify site's environment variables with Functions access enabled; keep the key out of this repository and out of `.env.example`. `GEMINI_MODEL` is optional and defaults to `gemini-2.5-flash`. After linking the site and setting the key, deploy with `netlify deploy --build --prod`.
+
 ## Pages and navigation
 
 The landing page (`/`) contains the product introduction and an interactive three-screen walkthrough. Use the arrow buttons, dots, or left/right keys while the carousel is focused to change screens. It pauses while hovered or focused, and turns off automatic motion when reduced motion is enabled. **Open the workbench** navigates to `/workbench`, a separate page with the code editor and analysis panels. Both use a short browser page transition where supported.
